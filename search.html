@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Student Management</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        input,
+        select {
+            margin-bottom: 10px;
+        }
+
+        #student-list {
+            margin-top: 20px;
+        }
+
+        .student-card {
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Student Management</h1>
+
+    <div>
+        <label for="searchInput">Search Student:</label>
+        <input type="text" id="searchInput" placeholder="Enter student name">
+    </div>
+
+    <div>
+        <label for="sortSelect">Sort By:</label>
+        <select id="sortSelect">
+            <option value="name">Name</option>
+            <option value="grade">Grade</option>
+            <!-- Add more options for sorting criteria if needed -->
+        </select>
+    </div>
+
+    <div id="student-list"></div>
+
+    <script>
+        var students = [
+            { name: 'Sushant', grade: 85 },
+            { name: 'Luffy', grade: 92 },
+            { name: 'Zoro', grade: 78 },
+            { name: 'Sanji', grade: 97 },
+            { name: 'Robin', grade: 100 }
+            // Add more students as needed
+        ];
+
+        function displayStudents(studentArray) {
+            var studentList = document.getElementById('student-list');
+            studentList.innerHTML = '';
+
+            studentArray.forEach(function (student) {
+                var studentCard = document.createElement('div');
+                studentCard.className = 'student-card';
+                studentCard.innerHTML = '<h4>' + student.name + '</h4><p>Grade: ' + student.grade + '</p>';
+                studentList.appendChild(studentCard);
+            });
+        }
+
+        displayStudents(students);
+
+        document.getElementById('searchInput').addEventListener('input', function () {
+            var searchTerm = this.value.toLowerCase();
+
+            var filteredStudents = students.filter(function (student) {
+                return student.name.toLowerCase().includes(searchTerm);
+            });
+
+            displayStudents(filteredStudents);
+        });
+
+        document.getElementById('sortSelect').addEventListener('change', function () {
+            var sortBy = this.value;
+
+            var sortedStudents = students.slice(0);
+
+            sortedStudents.sort(function (a, b) {
+                if (a[sortBy] < b[sortBy]) return 1;
+                if (a[sortBy] > b[sortBy]) return -1;
+                return 0;
+            });
+
+            displayStudents(sortedStudents);
+        });
+    </script>
+
+</body>
+
+</html>

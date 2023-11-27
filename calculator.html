@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        input,
+        button {
+            font-size: 18px;
+            margin: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Simple Calculator</h2>
+
+    <input type="text" id="result" disabled />
+
+    <br>
+
+    <input type="text" id="inputField" />
+
+    <br>
+
+    <button onclick="appendToInput('1')">1</button>
+    <button onclick="appendToInput('2')">2</button>
+    <button onclick="appendToInput('3')">3</button>
+    <button onclick="operationClick('+')">+</button>
+
+    <br>
+
+    <button onclick="appendToInput('4')">4</button>
+    <button onclick="appendToInput('5')">5</button>
+    <button onclick="appendToInput('6')">6</button>
+    <button onclick="operationClick('-')">-</button>
+
+    <br>
+
+    <button onclick="appendToInput('7')">7</button>
+    <button onclick="appendToInput('8')">8</button>
+    <button onclick="appendToInput('9')">9</button>
+    <button onclick="operationClick('*')">*</button>
+
+    <br>
+
+    <button onclick="appendToInput('0')">0</button>
+    <button onclick="clearInput()">C</button>
+    <button onclick="calculateResult()">=</button>
+    <button onclick="operationClick('/')">/</button>
+
+    <script>
+        function appendToInput(value) {
+            document.getElementById('inputField').value += value;
+        }
+
+        function clearInput() {
+            document.getElementById('inputField').value = '';
+            document.getElementById('result').value = '';
+        }
+
+        function calculateResult() {
+            try {
+                const result = eval(document.getElementById('inputField').value);
+                document.getElementById('result').value = result;
+            } catch (error) {
+                document.getElementById('result').value = 'Error';
+            }
+        }
+
+        function operationClick(operation) {
+            document.getElementById('inputField').value += operation;
+        }
+    </script>
+
+</body>
+
+</html>
