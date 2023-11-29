@@ -2,75 +2,93 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTML Page with Header, Footer, and Content</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Website</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: lightgray;
+            font-family: Arial, Helvetica, sans-serif;
             margin: 0;
             padding: 0;
         }
 
         header {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
+            background-color: black;
+            color: white;
             text-align: center;
+            text-decoration: dotted;
+            padding: 5px;
         }
 
         footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
+            color: white;
+            background-color: black;
+            padding: 8px;
             text-align: center;
-            position: fixed;
             bottom: 0;
             width: 100%;
+            position: fixed;
         }
 
-        .content {
-            padding: 20px;
-            margin: 20px;
-            border: 1px solid #ccc;
+        .content-container {
+            display: flex;
+            justify-content: space-between;
         }
 
-        .left-content {
-            float: left;
-            width: 30%;
-        }
-
+        .left-content,
+        .middle-content,
         .right-content {
-            float: right;
-            width: 60%;
+            width: 30%; /* Adjust the width as needed */
+            text-align: center;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
         }
     </style>
 </head>
 
 <body>
-
     <header>
-        <h1>Header</h1>
+        <h1>Your Website Header</h1>
     </header>
 
-    <div class="content">
-        <div class="left-content">
-            <h2>Left Content</h2>
-            <p>This is content on the left side.</p>
-        </div>
+    <main>
+        <div class="content-container">
+            <div class="left-content" id="leftContent">
+                <h2>Left Content</h2>
+                <p>This is the left side content.</p>
+                <button onclick="changeColor('leftContent', 'lightblue')">Change Color</button>
+            </div>
 
-        <div class="right-content">
-            <h2>Right Content</h2>
-            <p>This is content on the right side.</p>
-        </div>
+            <div class="middle-content" id="middleContent">
+                <h2>Middle Content</h2>
+                <p>This is the middle content.</p>
+                <button onclick="changeColor('middleContent', 'lightgreen')">Change Color</button>
+            </div>
 
-        <div style="clear: both;"></div> <!-- Clear the floats -->
-    </div>
+            <div class="right-content" id="rightContent">
+                <h2>Right Content</h2>
+                <p>This is the right side content.</p>
+                <button onclick="changeColor('rightContent', 'lightcoral')">Change Color</button>
+            </div>
+        </div>
+    </main>
 
     <footer>
-        <p>Footer</p>
+        <p>&copy; 2023 Your Website. All rights reserved.</p>
     </footer>
 
+    <script>
+        function changeColor(elementId, color) {
+            
+            var element = document.getElementById(elementId);
+            element.style.backgroundColor = color;
+         
+        }
+    </script>
 </body>
 
 </html>
