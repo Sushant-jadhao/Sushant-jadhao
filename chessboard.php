@@ -1,66 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resizable Chessboard</title>
-    <style>
-        body {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chessboard</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
-        #chessboard {
-            border-collapse: collapse;
-            border: 2px solid #000;
-            table-layout: fixed;
-        }
+    .chessboard {
+      display: grid;
+      grid-template-columns: repeat(8, 50px);
+      grid-template-rows: repeat(8, 50px);
+    }
 
-        #chessboard td {
-            width: 30px;
-            height: 30px;
-            border: 1px solid #000;
-            text-align: center;
-            font-size: 20px;
-        }
-    </style>
+    .square {
+      width: 50px;
+      height: 50px;
+      box-sizing: border-box;
+    }
+
+    .dark {
+      background-color: #769656;
+    }
+
+    .light {
+      background-color: #eeeed2;
+    }
+  </style>
 </head>
-
 <body>
-    <label for="dimension">Chessboard Dimension:</label>
-    <input type="number" id="dimension" value="8" min="1" max="20">
-    <button onclick="createChessboard()">Create Chessboard</button>
 
-    <table id="chessboard"></table>
+<div class="chessboard" id="chessboard"></div>
 
-    <script>
-        function createChessboard() {
-            const dimension = document.getElementById("dimension").value;
-            const chessboard = document.getElementById("chessboard");
+<script>
+  // Create the chessboard
+  const chessboardElement = document.getElementById('chessboard');
 
-            // Clear previous chessboard
-            chessboard.innerHTML = "";
+  for (let row = 0; row < 8; row++) {
+    for (let col = 0; col < 8; col++) {
+      const squareElement = document.createElement('div');
+      squareElement.classList.add('square');
 
-            for (let i = 0; i < dimension; i++) {
-                const row = chessboard.insertRow(i);
+      // Add dark or light class based on the position
+      if ((row + col) % 2 === 0) {
+        squareElement.classList.add('light');
+      } else {
+        squareElement.classList.add('dark');
+      }
 
-                for (let j = 0; j < dimension; j++) {
-                    const cell = row.insertCell(j);
-                    cell.textContent = (i + j) % 2 === 0 ? "♟" : "♙";
-                }
-            }
-        }
-
-        // Initial chessboard creation
-        createChessboard();
-
-        // Update chessboard on input change
-        document.getElementById("dimension").addEventListener("input", createChessboard);
-    </script>
+      chessboardElement.appendChild(squareElement);
+    }
+}
+  </script>
 </body>
-
 </html>
