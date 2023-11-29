@@ -1,4 +1,3 @@
-// CurrencyConverter.js
 import React, { useState } from "react";
 
 const CurrencyConverter = () => {
@@ -7,15 +6,53 @@ const CurrencyConverter = () => {
   const [toCurrency, setToCurrency] = useState("EUR");
   const [convertedAmount, setConvertedAmount] = useState(null);
 
-  const handleConvert = async () => {
-    // Implement currency conversion logic here
-    // You can use a currency conversion API or implement your own logic
+  const exchangeRates = {
+    USD: {
+      EUR: 0.85,
+      GBP: 0.74,
+      JPY: 114.20,
+      INR: 73.50, // INR exchange rate (example value)
+      // Add more exchange rates as needed
+    },
+    EUR: {
+      USD: 1.18,
+      GBP: 0.87,
+      JPY: 131.75,
+      INR: 87.23, // INR exchange rate (example value)
+      // Add more exchange rates as needed
+    },
+    GBP: {
+      USD: 1.35,
+      EUR: 1.15,
+      JPY: 151.34,
+      INR: 99.50, // INR exchange rate (example value)
+      // Add more exchange rates as needed
+    },
+    JPY: {
+      USD: 0.0088,
+      EUR: 0.0076,
+      GBP: 0.0066,
+      INR: 0.65, // INR exchange rate (example value)
+      // Add more exchange rates as needed
+    },
+    INR: {
+      USD: 0.014, // Example value, you should replace it with the actual rate
+      EUR: 0.011, // Example value, you should replace it with the actual rate
+      GBP: 0.0101, // Example value, you should replace it with the actual rate
+      JPY: 1.53, // Example value, you should replace it with the actual rate
+      // Add more exchange rates as needed
+    },
+    // Add more currencies as needed
+  };
 
-    // For example, using a hardcoded exchange rate for demonstration
-    const exchangeRate = 0.85;
-    const result = amount * exchangeRate;
-
-    setConvertedAmount(result.toFixed(2)); // Limit to 2 decimal places
+  const handleConvert = () => {
+    const rate = exchangeRates[fromCurrency][toCurrency];
+    if (rate) {
+      const result = amount * rate;
+      setConvertedAmount(result.toFixed(2));
+    } else {
+      console.error(`Exchange rate for ${fromCurrency} to ${toCurrency} not available`);
+    }
   };
 
   return (
@@ -39,7 +76,11 @@ const CurrencyConverter = () => {
             onChange={(e) => setFromCurrency(e.target.value)}
           >
             <option value="USD">USD</option>
-            {/* Add other currency options as needed */}
+            <option value="EUR">EUR</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="INR">INR</option>
+            {/* Add more currency options as needed */}
           </select>
         </label>
       </div>
@@ -51,7 +92,11 @@ const CurrencyConverter = () => {
             onChange={(e) => setToCurrency(e.target.value)}
           >
             <option value="EUR">EUR</option>
-            {/* Add other currency options as needed */}
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+            <option value="JPY">JPY</option>
+            <option value="INR">INR</option>
+            {/* Add more currency options as needed */}
           </select>
         </label>
       </div>
