@@ -10,8 +10,13 @@ const CurrencyConverter = () => {
     USD: {
       EUR: 0.85,
       GBP: 0.74,
+<<<<<<< HEAD
+      JPY: 114.2,
+      INR: 73.5, // INR exchange rate (example value)
+=======
       JPY: 114.20,
       INR: 73.50, // INR exchange rate (example value)
+>>>>>>> 751b69ae93d78bcd2d0a2f4f5a79fc3f55e690ba
       // Add more exchange rates as needed
     },
     EUR: {
@@ -25,7 +30,11 @@ const CurrencyConverter = () => {
       USD: 1.35,
       EUR: 1.15,
       JPY: 151.34,
+<<<<<<< HEAD
+      INR: 99.5, // INR exchange rate (example value)
+=======
       INR: 99.50, // INR exchange rate (example value)
+>>>>>>> 751b69ae93d78bcd2d0a2f4f5a79fc3f55e690ba
       // Add more exchange rates as needed
     },
     JPY: {
@@ -51,7 +60,13 @@ const CurrencyConverter = () => {
       const result = amount * rate;
       setConvertedAmount(result.toFixed(2));
     } else {
+<<<<<<< HEAD
+      console.error(
+        `Exchange rate for ${fromCurrency} to ${toCurrency} not available`
+      );
+=======
       console.error(`Exchange rate for ${fromCurrency} to ${toCurrency} not available`);
+>>>>>>> 751b69ae93d78bcd2d0a2f4f5a79fc3f55e690ba
     }
   };
 
