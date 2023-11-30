@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Javascript Form validation</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <u>
+        <h2>Registration Form</h2>
+    </u>
+    <form action="myaction.php" name="myform" onsubmit="return validateform()" method="post">
+
+        <div class="design">
+
+            <div class="formdesign" id="name">
+                <label class="n">Name : </label>
+                <br>
+                <input type="text" name="fname" required><br><b><span class="formerror"></span></b>
+                </b>
+                <br>
+                <div class="formdesign" id="email">
+                    <label class="e">Email: </label>
+                    <br>
+
+                    <input type="email" name="femail" required><br><b><span class="formerror"></span></b>
+                </div>
+                <div class="formdesign" id="phone">
+                    <label class="p">Phone:</label>
+                    <br>
+
+                    <input type="phone" name="fphone" required><br><b><span class="formerror"></span></b>
+                </div>
+
+                <div class="formdesign" id="pass">
+                    <label class="ps">Password:</label>
+                    <br>
+                    <input type="password" name="pass" required><br><b><span class="formerror"></span></b>
+                </div>
+                <div class="formdesign" id="cpass">
+                    <label class="cps">Confirm Password:</label>
+                    <br>
+                    <input type="password" name="cpass" required><br><b><span class="formerror"></span></b>
+                </div>
+                <br>
+                <button> Submit</button>
+                <!-- <input class="but" type="submit" value="submit"> -->
+
+            </div>
+    </form>
+    <script>
+        function clearerror() {
+            errors = document.getElementsByClassName('formerror');
+            for (let item of errors) {
+                item.innerHTML = " ";
+            }
+        }
+        function seterror(id, error) {
+            // sets error inside tag  of id
+            element = document.getElementById(id);
+            element.getElementsByClassName('formerror')[0].innerHTML = error;
+        }
+        function validateform() {
+            var returnval = true;
+            clearerror();
+            var name = document.forms['myform']['fname'].value;
+            console.log(name);
+            if (name.length < 5) {
+                seterror("name", "*Length of name is too short");
+                returnval = false;
+            }
+            if (name.length == 0) {
+                seterror("name", "*Length of name cannot be zero");
+                returnval = false;
+            }
+
+            var email = document.forms['myform']['femail'].value;
+            if (email.length > 15) {
+                seterror('email', '*Length of email is too long');
+                returnval = false;
+            }
+            var phone = document.forms['myform']['fphone'].value;
+            if (phone.length != 10) {
+                seterror('phone', '*Please enter a valid phone number');
+                returnval = false;
+            }
+
+            var password = document.forms['myform']['pass'].value;
+            var lowercase = /[a-z]/g;
+            var uppercase = /[A-Z]/g;
+            var number = /[0-9]/g;
+            if (!(password.match(lowercase) && password.match(uppercase) && password.match(number) && password.length >= 8)) {
+                seterror('password', '*Please enter a valid password including lowercase, uppercase, a number, and at least 8 characters long.');
+                returnval = false;
+            }
+            var cpassword = document.forms['myform']['cpass'].value;
+            if (cpassword != password) {
+                seterror('cpassword', 'Passwords do not match.Please enter correct password.');
+                returnval = false;
+            }
+
+
+            return returnval;
+        }
+    </script>
+</body>
+
+</html>
