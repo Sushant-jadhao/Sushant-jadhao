@@ -1,0 +1,74 @@
+package com.example.lab;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@SpringBootApplication
+public class LabApplication {
+    
+    @RequestMapping(value = "/calculate")
+    public String calculateMarks() {
+        // Hardcoded marks for subjects in first semester
+        int englishMarksSem1 = 85;
+        int mathMarksSem1 = 92;
+        int scienceMarksSem1 = 78;
+        
+        // Hardcoded marks for subjects in second semester
+        int englishMarksSem2 = 78;
+        int mathMarksSem2 = 88;
+        int scienceMarksSem2 = 92;
+        
+        // Calculate total marks and average marks for both semesters
+        int totalMarksSem1 = englishMarksSem1 + mathMarksSem1 + scienceMarksSem1;
+        int totalMarksSem2 = englishMarksSem2 + mathMarksSem2 + scienceMarksSem2;
+        
+        double weightedTotal = (0.3 * totalMarksSem1) + (0.7 * totalMarksSem2);
+        double weightedAverage = weightedTotal / 3.0;
+        
+        // HTML content with CSS for better styling
+        String htmlContent = "<html><head><style>" +
+            "body { font-family: Arial, sans-serif; background-color: #f5f5f5; text-align: center; }" +
+            ".container { max-width: 800px; margin: 0 auto; padding: 20px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }" +
+            "h1 { color: #333; }" +
+            "h2 { color: #555; margin-top: 20px; }" +
+            "table { width: 100%; border-collapse: collapse; margin-top: 10px; }" +
+            "th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }" +
+            "th { background-color: #f2f2f2; }" +
+            ".result { margin-top: 20px; }" +
+            "</style></head><body>" +
+            "<div class=\"container\">" +
+            "<h1>MarkSheet</h1>" +
+            "<h2>MID SEMESTER</h2>" +
+            "<table>" +
+            "<tr><th>Subject</th><th>Marks</th></tr>" +
+            "<tr><td>WEB Technology</td><td>" + englishMarksSem1 + "</td></tr>" +
+            "<tr><td>DAA</td><td>" + mathMarksSem1 + "</td></tr>" +
+            "<tr><td>Computer Networks</td><td>" + scienceMarksSem1 + "</td></tr>" +
+            "<tr><th>Total</th><th>" + totalMarksSem1 + "</th></tr>" +
+            "</table>" +
+            "<h2>END SEMESTER</h2>" +
+            "<table>" +
+            "<tr><th>Subject</th><th>Marks</th></tr>" +
+            "<tr><td>WEB Technology</td><td>" + englishMarksSem2 + "</td></tr>" +
+            "<tr><td>DAA</td><td>" + mathMarksSem2 + "</td></tr>" +
+            "<tr><td>Computer Networks</td><td>" + scienceMarksSem2 + "</td></tr>" +
+            "<tr><th>Total</th><th>" + totalMarksSem2 + "</th></tr>" +
+            "</table>" +
+            "<div class=\"result\">" +
+            "<h2>Weighted Results</h2>" +
+            "<p><strong>Weighted Total:</strong> " + weightedTotal + "</p>" +
+            "<p><strong>Weighted Average:</strong> " + weightedAverage + "</p>" +
+            "</div>" +
+            "</div>" +
+            "</body></html>";
+        
+        return htmlContent;
+    }
+    
+    public static void main(String[] args) {
+        SpringApplication.run(LabApplication.class, args);
+    }
+}
